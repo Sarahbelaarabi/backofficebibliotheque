@@ -1,0 +1,103 @@
+﻿<Window x:Class="backfofficegestiondebibliotheque.Employee"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:backfofficegestiondebibliotheque"
+        mc:Ignorable="d"
+         Height="600" Width="1302" WindowStartupLocation="CenterScreen"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent" >
+    <Grid>
+        <!-- hena 9smna la page dyal dasbhoard-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--hena andiro les coleurs ldesign lfjnb-->
+        <Border CornerRadius="10 0 0 10">
+            <Border.Background>
+                <LinearGradientBrush  StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="#D94448" Offset="0" />
+                    <GradientStop Color="Black" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <!--creer un separator et creer button dashboard -->
+            <StackPanel>
+                <Separator Height="0.8" Margin="20 30" Background="Black"/>
+            </StackPanel>
+
+        </Border>
+        <Border Grid.Column="1" CornerRadius="0 10 10 0">
+            <Border.Background>
+                <LinearGradientBrush  StartPoint="1,0" EndPoint="0,1">
+                    <GradientStop Color="#D94448" Offset="0" />
+                    <GradientStop Color="Black" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Button Content="Dashboard" HorizontalAlignment="Center"  Margin="0,102,0,0" VerticalAlignment="Top" Width="174" Background="Black" BorderBrush="White" Click="Button_Click"/>
+        <Button Content="Livres" HorizontalAlignment="Center"  Margin="0,192,0,0" VerticalAlignment="Top" Width="174" Background="Black" BorderBrush="White" Click="Button_Click_1"/>
+        <Button Content= "Employee" HorizontalAlignment="Center"  Margin="0,362,0,0" VerticalAlignment="Top" Width="174" Background="Black" BorderBrush="White" Click="Button_Click_3"/>
+        <Button Content="Reservation" HorizontalAlignment="Center"  Margin="0,460,0,0" VerticalAlignment="Top" Width="174" Background="Black" BorderBrush="White" Click="Button_Click_4"/>
+        <Button Content="Adhrents" HorizontalAlignment="Center"  Margin="0,278,0,0" VerticalAlignment="Top" Width="174" Background="Black" BorderBrush="white" Click="Button_Click_2"/>
+
+        <Border Grid.Column="1" CornerRadius="0 10 10 0">
+            <Border.Background>
+                <LinearGradientBrush  StartPoint="1,0" EndPoint="0,1">
+                    <GradientStop Color="#D94448" Offset="0" />
+                    <GradientStop Color="Black" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid Grid.Column="1" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="791*"/>
+                    <ColumnDefinition Width="41*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" VerticalAlignment="Top">
+                    <Label Content="ID Employé" Foreground="White"/>
+                    <TextBox x:Name="txtIDEmploye" Width="200" Foreground="black" BorderBrush="#89FFFFFF"/>
+                    <Label Content="Nom Utilisateur" Foreground="White"/>
+                    <TextBox x:Name="txtNomUtilisateur" Width="200" Foreground="black" BorderBrush="#89FFFFFF"/>
+                    <Label Content="Prénom" Foreground="White"/>
+                    <TextBox x:Name="txtPrenom" Width="200" Foreground="black" BorderBrush="#89FFFFFF"/>
+                    <Label Content="Nom" Foreground="White"/>
+                    <TextBox x:Name="txtNom" Width="200" Foreground="Black" BorderBrush="#89FFFFFF"/>
+                    <Label Content="Rôle" Foreground="White"/>
+                    <ComboBox x:Name="cmbRole" Width="200" Foreground="Black" BorderBrush="#89FFFFFF">
+                        <ComboBoxItem Content="Admin" Background="White"/>
+                        <ComboBoxItem Content="Employee" Background="White"/>
+                    </ComboBox>
+                    <Label Content="Numéro de Téléphone" Foreground="White"/>
+                    <TextBox x:Name="txtNumeroTelephone" Width="200" Foreground="Black" BorderBrush="#89FFFFFF"/>
+                    <Label Content="Email" Foreground="White"/>
+                    <TextBox x:Name="txtEmail" Width="200" Foreground="Black" BorderBrush="#89FFFFFF"/>
+                    <Label Content="Mot de Passe" Foreground="White"/>
+                    <PasswordBox x:Name="pwdMotDePasse" Width="200" BorderBrush="#89FFFFFF"/>
+                    <Label Content="Image" Foreground="White" />
+                    <Button x:Name="btnTelechargerImage" Content="Télécharger Image" Margin="0,5,0,0" Width="200" Click="btnTelechargerImage_Click"/>
+                    <Button Content="Créer Employé" Margin="0,10,0,0" Width="200" Click="creer_Employee"/>
+                    <Button Content="Modifier Employé" Margin="0,5,0,0" Width="200" Click="modfier_Employee"/>
+                    <Button Content="Supprimer Employé" Margin="0,5,0,0" Width="200" Click="supprimer_Employee"/>
+                </StackPanel>
+                <ListView x:Name="ListViewEmployee" Grid.Column="1" Margin="10,10,10,10" Grid.ColumnSpan="2" SelectionChanged="ListViewEmployee_SelectionChanged">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID Employé" Width="120" DisplayMemberBinding="{Binding ID_Personne}"/>
+                            <GridViewColumn Header="Nom Utilisateur" Width="120" DisplayMemberBinding="{Binding NomUtilisateur}"/>
+                            <GridViewColumn Header="Prénom" Width="100" DisplayMemberBinding="{Binding Prenom}"/>
+                            <GridViewColumn Header="Nom" Width="100" DisplayMemberBinding="{Binding Nom}"/>
+                            <GridViewColumn Header="Rôle" Width="100" DisplayMemberBinding="{Binding Role}"/>
+                            <GridViewColumn Header="Numéro de Téléphone" Width="120" DisplayMemberBinding="{Binding NumeroTelephone}"/>
+                            <GridViewColumn Header="Email" Width="150" DisplayMemberBinding="{Binding Email}"/>
+                            <GridViewColumn Header="Mot de Passe" Width="100" DisplayMemberBinding="{Binding MotDePasse}"/>
+                          <!--  <GridViewColumn Header="Adresse Image" Width="150" DisplayMemberBinding="{Binding AdresseImage}"/> -->
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

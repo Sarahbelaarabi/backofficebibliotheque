@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BibliothequeDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Emprunts">
+          <Key>
+            <PropertyRef Name="ID_Emprunt" />
+          </Key>
+          <Property Name="ID_Emprunt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Personne" Type="int" />
+          <Property Name="ID_Livre" Type="int" />
+          <Property Name="DateEmprunt" Type="date" />
+          <Property Name="DateRetour" Type="date" />
+        </EntityType>
+        <EntityType Name="Livres">
+          <Key>
+            <PropertyRef Name="ID_Livre" />
+          </Key>
+          <Property Name="ID_Livre" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titre" Type="varchar" MaxLength="255" />
+          <Property Name="Auteur" Type="varchar" MaxLength="100" />
+          <Property Name="ISBN" Type="varchar" MaxLength="20" />
+          <Property Name="DatePublication" Type="date" />
+          <Property Name="QuantiteDisponible" Type="int" />
+          <Property Name="Description" Type="text" />
+          <Property Name="AdresseImage" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Logs">
+          <Key>
+            <PropertyRef Name="ID_Log" />
+          </Key>
+          <Property Name="ID_Log" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateHeure" Type="datetime" />
+          <Property Name="Action" Type="varchar" MaxLength="255" />
+          <Property Name="ID_Personne" Type="int" />
+        </EntityType>
+        <EntityType Name="Personnes">
+          <Key>
+            <PropertyRef Name="ID_Personne" />
+          </Key>
+          <Property Name="ID_Personne" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomUtilisateur" Type="varchar" MaxLength="50" />
+          <Property Name="Prenom" Type="varchar" MaxLength="100" />
+          <Property Name="Nom" Type="varchar" MaxLength="100" />
+          <Property Name="Role" Type="varchar" MaxLength="50" />
+          <Property Name="NumeroTelephone" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="MotDePasse" Type="varchar" MaxLength="100" />
+          <Property Name="AdresseImage" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__Emprunts__ID_Liv__4E88ABD4">
+          <End Role="Livres" Type="Self.Livres" Multiplicity="0..1" />
+          <End Role="Emprunts" Type="Self.Emprunts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Livres">
+              <PropertyRef Name="ID_Livre" />
+            </Principal>
+            <Dependent Role="Emprunts">
+              <PropertyRef Name="ID_Livre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Emprunts__ID_Per__4D94879B">
+          <End Role="Personnes" Type="Self.Personnes" Multiplicity="0..1" />
+          <End Role="Emprunts" Type="Self.Emprunts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnes">
+              <PropertyRef Name="ID_Personne" />
+            </Principal>
+            <Dependent Role="Emprunts">
+              <PropertyRef Name="ID_Personne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Logs__ID_Personn__5165187F">
+          <End Role="Personnes" Type="Self.Personnes" Multiplicity="0..1" />
+          <End Role="Logs" Type="Self.Logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnes">
+              <PropertyRef Name="ID_Personne" />
+            </Principal>
+            <Dependent Role="Logs">
+              <PropertyRef Name="ID_Personne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BibliothequeDBModelStoreContainer">
+          <EntitySet Name="Emprunts" EntityType="Self.Emprunts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Livres" EntityType="Self.Livres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personnes" EntityType="Self.Personnes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Emprunts__ID_Liv__4E88ABD4" Association="Self.FK__Emprunts__ID_Liv__4E88ABD4">
+            <End Role="Livres" EntitySet="Livres" />
+            <End Role="Emprunts" EntitySet="Emprunts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Emprunts__ID_Per__4D94879B" Association="Self.FK__Emprunts__ID_Per__4D94879B">
+            <End Role="Personnes" EntitySet="Personnes" />
+            <End Role="Emprunts" EntitySet="Emprunts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Logs__ID_Personn__5165187F" Association="Self.FK__Logs__ID_Personn__5165187F">
+            <End Role="Personnes" EntitySet="Personnes" />
+            <End Role="Logs" EntitySet="Logs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BibliothequeDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Emprunt">
+          <Key>
+            <PropertyRef Name="ID_Emprunt" />
+          </Key>
+          <Property Name="ID_Emprunt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Personne" Type="Int32" />
+          <Property Name="ID_Livre" Type="Int32" />
+          <Property Name="DateEmprunt" Type="DateTime" Precision="0" />
+          <Property Name="DateRetour" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Livre" Relationship="Self.FK__Emprunts__ID_Liv__4E88ABD4" FromRole="Emprunts" ToRole="Livres" />
+          <NavigationProperty Name="Personne" Relationship="Self.FK__Emprunts__ID_Per__4D94879B" FromRole="Emprunts" ToRole="Personnes" />
+        </EntityType>
+        <EntityType Name="Livre">
+          <Key>
+            <PropertyRef Name="ID_Livre" />
+          </Key>
+          <Property Name="ID_Livre" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Auteur" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ISBN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DatePublication" Type="DateTime" Precision="0" />
+          <Property Name="QuantiteDisponible" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AdresseImage" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Emprunts" Relationship="Self.FK__Emprunts__ID_Liv__4E88ABD4" FromRole="Livres" ToRole="Emprunts" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="ID_Log" />
+          </Key>
+          <Property Name="ID_Log" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateHeure" Type="DateTime" Precision="3" />
+          <Property Name="Action" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Personne" Type="Int32" />
+          <NavigationProperty Name="Personne" Relationship="Self.FK__Logs__ID_Personn__5165187F" FromRole="Logs" ToRole="Personnes" />
+        </EntityType>
+        <EntityType Name="Personne">
+          <Key>
+            <PropertyRef Name="ID_Personne" />
+          </Key>
+          <Property Name="ID_Personne" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomUtilisateur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Prenom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroTelephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MotDePasse" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AdresseImage" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Emprunts" Relationship="Self.FK__Emprunts__ID_Per__4D94879B" FromRole="Personnes" ToRole="Emprunts" />
+          <NavigationProperty Name="Logs" Relationship="Self.FK__Logs__ID_Personn__5165187F" FromRole="Personnes" ToRole="Logs" />
+        </EntityType>
+        <Association Name="FK__Emprunts__ID_Liv__4E88ABD4">
+          <End Role="Livres" Type="Self.Livre" Multiplicity="0..1" />
+          <End Role="Emprunts" Type="Self.Emprunt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Livres">
+              <PropertyRef Name="ID_Livre" />
+            </Principal>
+            <Dependent Role="Emprunts">
+              <PropertyRef Name="ID_Livre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Emprunts__ID_Per__4D94879B">
+          <End Role="Personnes" Type="Self.Personne" Multiplicity="0..1" />
+          <End Role="Emprunts" Type="Self.Emprunt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnes">
+              <PropertyRef Name="ID_Personne" />
+            </Principal>
+            <Dependent Role="Emprunts">
+              <PropertyRef Name="ID_Personne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Logs__ID_Personn__5165187F">
+          <End Role="Personnes" Type="Self.Personne" Multiplicity="0..1" />
+          <End Role="Logs" Type="Self.Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnes">
+              <PropertyRef Name="ID_Personne" />
+            </Principal>
+            <Dependent Role="Logs">
+              <PropertyRef Name="ID_Personne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BibliothequeDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Emprunts" EntityType="Self.Emprunt" />
+          <EntitySet Name="Livres" EntityType="Self.Livre" />
+          <EntitySet Name="Logs" EntityType="Self.Log" />
+          <EntitySet Name="Personnes" EntityType="Self.Personne" />
+          <AssociationSet Name="FK__Emprunts__ID_Liv__4E88ABD4" Association="Self.FK__Emprunts__ID_Liv__4E88ABD4">
+            <End Role="Livres" EntitySet="Livres" />
+            <End Role="Emprunts" EntitySet="Emprunts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Emprunts__ID_Per__4D94879B" Association="Self.FK__Emprunts__ID_Per__4D94879B">
+            <End Role="Personnes" EntitySet="Personnes" />
+            <End Role="Emprunts" EntitySet="Emprunts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Logs__ID_Personn__5165187F" Association="Self.FK__Logs__ID_Personn__5165187F">
+            <End Role="Personnes" EntitySet="Personnes" />
+            <End Role="Logs" EntitySet="Logs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BibliothequeDBModelStoreContainer" CdmEntityContainer="BibliothequeDBEntities1">
+          <EntitySetMapping Name="Emprunts">
+            <EntityTypeMapping TypeName="BibliothequeDBModel.Emprunt">
+              <MappingFragment StoreEntitySet="Emprunts">
+                <ScalarProperty Name="ID_Emprunt" ColumnName="ID_Emprunt" />
+                <ScalarProperty Name="ID_Personne" ColumnName="ID_Personne" />
+                <ScalarProperty Name="ID_Livre" ColumnName="ID_Livre" />
+                <ScalarProperty Name="DateEmprunt" ColumnName="DateEmprunt" />
+                <ScalarProperty Name="DateRetour" ColumnName="DateRetour" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Livres">
+            <EntityTypeMapping TypeName="BibliothequeDBModel.Livre">
+              <MappingFragment StoreEntitySet="Livres">
+                <ScalarProperty Name="ID_Livre" ColumnName="ID_Livre" />
+                <ScalarProperty Name="Titre" ColumnName="Titre" />
+                <ScalarProperty Name="Auteur" ColumnName="Auteur" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="DatePublication" ColumnName="DatePublication" />
+                <ScalarProperty Name="QuantiteDisponible" ColumnName="QuantiteDisponible" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AdresseImage" ColumnName="AdresseImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="BibliothequeDBModel.Log">
+              <MappingFragment StoreEntitySet="Logs">
+                <ScalarProperty Name="ID_Log" ColumnName="ID_Log" />
+                <ScalarProperty Name="DateHeure" ColumnName="DateHeure" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="ID_Personne" ColumnName="ID_Personne" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personnes">
+            <EntityTypeMapping TypeName="BibliothequeDBModel.Personne">
+              <MappingFragment StoreEntitySet="Personnes">
+                <ScalarProperty Name="ID_Personne" ColumnName="ID_Personne" />
+                <ScalarProperty Name="NomUtilisateur" ColumnName="NomUtilisateur" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="NumeroTelephone" ColumnName="NumeroTelephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MotDePasse" ColumnName="MotDePasse" />
+                <ScalarProperty Name="AdresseImage" ColumnName="AdresseImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,32 @@
+﻿<Window x:Class="backfofficegestiondebibliotheque.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:backfofficegestiondebibliotheque"
+        mc:Ignorable="d" Height="600" Width="1000" WindowStartupLocation="CenterScreen"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent" >
+
+    <Grid Margin="10,0,0,0">
+        <!-- hena 9smna la page dyal dasbhoard-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--hena andiro les coleurs ldesign lfjnb-->
+
+
+        <Border CornerRadius="0 10 10 0" Grid.ColumnSpan="2">
+            <Border.Background>
+                <LinearGradientBrush  StartPoint="1,0" EndPoint="0,1">
+                    <GradientStop Color="#D94448" Offset="0" />
+                    <GradientStop Color="Black" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+
+        </Border>
+        <Button x:Name="Login" Content="Login" Grid.Column="1" Margin="284,440,206,128" Background="Black" Click="Login_Click" BorderBrush="#FFF1F1F1"/>
+        <Image Source="Images/ICON4801.png" Height="642" VerticalAlignment="Top" Margin="40,-42,632,0" Stretch="Fill" Grid.ColumnSpan="2"/>
+    </Grid>
+</Window>
