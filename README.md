@@ -30,5 +30,4 @@ Décrivez ici les étapes pour installer et configurer l'application, y compris 
 
 Fournissez des instructions sur la façon d'utiliser l'application, y compris la manière de se connecter en tant qu'administrateur ou adhérent.
 
-### Contribution
 
